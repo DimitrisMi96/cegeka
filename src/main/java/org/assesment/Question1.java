@@ -14,12 +14,13 @@ import java.time.Duration;
 import java.util.List;
 import java.util.Random;
 
-public class Question2 {
+public class Question1 {
 
     private static WebDriver driver;
     private static WebDriverWait wait;
     private Random random;
     private ChromeOptions options;
+
 
     @Before
     public void setup() {
@@ -40,30 +41,17 @@ public class Question2 {
     }
 
     @Test
-    public void randomRadioButtonPicker() {
-        driver.get("file:///C:/Users/Jim/AppData/Local/Temp/%7B3ED5BD84-4ACD-44FD-A750-4DBCFA8E0D60%7D/%7BC3250C1F-B661-4528-8E92-7975B136173E%7D/QuestionnariePage.xml");
+    public void login1() {
+        driver.get("file:///C:/Users/Jim/Desktop/LoginPage.xml");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("kc-form-login")));
+        driver.findElement(By.id("username")).sendKeys("xxx");
+        driver.findElement(By.id("password")).sendKeys("yyy");
+        driver.findElement(By.id("kc-login")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("")));
 
-        // Wait for element visibility
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("j_idt39:j_idt43")));
-        Assert.assertEquals("Under Appraisal / Operation Active", driver.findElement(By.id("j_idt39:j_idt43")).getText());
-
-        // Create a list that contains all radio buttons
-        List<WebElement> radioButtons = driver.findElements(By.xpath("//*[local-name()='input' and @type='radio' and (@value='Y' or @value='N')]"));
-
-        // Randomly select either "Yes" or "No" for each question
-        for (WebElement radioButton : radioButtons) {
-            // Check if the radio button is not selected
-            if (!radioButton.isSelected()) {
-                // Randomly click either Yes or No
-                if (random.nextBoolean() && radioButton.getAttribute("value").equals("Y")) {
-                    radioButton.click();
-                } else if (!random.nextBoolean() && radioButton.getAttribute("value").equals("N")) {
-                    radioButton.click();
-                }
-            }
-        }
-        System.out.println("All radio buttons have been assigned option");
     }
+
+
 
     @After
     public void tearDown() {
@@ -71,4 +59,5 @@ public class Question2 {
         driver.manage().deleteAllCookies();
         driver.quit();
     }
+
 }
