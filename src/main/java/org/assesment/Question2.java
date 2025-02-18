@@ -10,6 +10,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.nio.file.Paths;
 import java.time.Duration;
 import java.util.List;
 import java.util.Random;
@@ -41,7 +42,10 @@ public class Question2 {
 
     @Test
     public void randomRadioButtonPicker() {
-        driver.get("file:///C:/Users/Jim/AppData/Local/Temp/%7B3ED5BD84-4ACD-44FD-A750-4DBCFA8E0D60%7D/%7BC3250C1F-B661-4528-8E92-7975B136173E%7D/QuestionnariePage.xml");
+
+        //Path logic since xml file is placed in the project resources.
+        String filePath = Paths.get("src", "main", "resources", "QuestionnariePage.xml").toAbsolutePath().toString();
+        driver.get("file:///" + filePath.replace("\\", "/"));
 
         // Wait for element visibility
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("j_idt39:j_idt43")));

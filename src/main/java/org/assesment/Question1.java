@@ -10,6 +10,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.nio.file.Paths;
 import java.time.Duration;
 import java.util.List;
 import java.util.Random;
@@ -18,7 +19,6 @@ public class Question1 {
 
     private static WebDriver driver;
     private static WebDriverWait wait;
-    private Random random;
     private ChromeOptions options;
 
 
@@ -37,12 +37,16 @@ public class Question1 {
 
         // Initialize WebDriverWait and Random
         wait = new WebDriverWait(driver, Duration.ofSeconds(3));
-        random = new Random();
     }
 
     @Test
     public void login1() {
-        driver.get("file:///C:/Users/Jim/Desktop/LoginPage.xml");
+
+        String filePath = Paths.get("src", "main", "resources", "LoginPage (2).xml").toAbsolutePath().toString();
+        driver.get("file:///" + filePath.replace("\\", "/"));
+        //driver.get("file:///C:/Users/Jim/Desktop/LoginPage.xml");
+
+
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("kc-form-login")));
         driver.findElement(By.id("username")).sendKeys("xxx");
         driver.findElement(By.id("password")).sendKeys("yyy");
@@ -50,7 +54,6 @@ public class Question1 {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("")));
 
     }
-
 
 
     @After

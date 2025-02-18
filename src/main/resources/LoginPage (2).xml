@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html
+	xmlns="http://www.w3.org/1999/xhtml" class="login-pf">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="robots" content="noindex, nofollow" />
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<title>Log in to VMD-SERAPIS-01</title>
+		<!-- JavaScript validation code -->
+		<script type="text/javascript">
+            // Function to validate email and password
+            function validateForm() {
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+            var loginButton = document.getElementById("kc-login");
+            var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; // Regular expression for email validation
+
+            // Check if email is valid
+            var isValidEmail = emailPattern.test(email);
+            // Check if password is at least 8 characters
+            var isValidPassword = password.length >= 8;
+
+            // If both email and password are valid, enable login button, else disable it
+            if (isValidEmail && isValidPassword) {
+            loginButton.disabled = false;
+            } else {
+            loginButton.disabled = true;
+            }
+
+            // Show or hide validation messages
+            if (!isValidEmail) {
+            document.getElementById("invalid-email-message").style.display = "block";
+            } else {
+            document.getElementById("invalid-email-message").style.display = "none";
+            }
+
+            if (!isValidPassword) {
+            document.getElementById("short-password-message").style.display = "block";
+            } else {
+            document.getElementById("short-password-message").style.display = "none";
+            }
+
+            // Prevent form submission if validation fails
+            return isValidEmail && isValidPassword;
+            }
+
+            // Event listeners for email and password fields to trigger validation
+            window.onload = function() {
+            document.getElementById("email").addEventListener("input", validateForm);
+            document.getElementById("password").addEventListener("input", validateForm);
+            };
+        </script>
+	</head>
+	<body>
+		<div class="login-pf-page">
+			<div id="kc-header" class="login-pf-page-header">
+				<div id="kc-header-wrapper" class="">VMD-SERAPIS-01</div>
+			</div>
+			<div class="card-pf">
+				<header class="login-pf-header">
+					<h1 id="kc-page-title">Log In</h1>
+				</header>
+				<div id="kc-content">
+					<div id="kc-content-wrapper">
+						<div id="kc-form">
+							<div id="kc-form-wrapper">
+								<form
+                                        id="kc-form-login"
+                                        action="https://test.com" 
+									<!-- Update this as needed -->
+                                method="post"
+                                onsubmit="return validateForm();"
+                                >
+									<!-- Email input field -->
+									<div class="form-group">
+										<label for="email" class="control-label">Email</label>
+										<input
+                                            tabindex="1"
+                                            id="email"
+                                            class="form-control"
+                                            name="email"
+                                            type="text"
+                                            autofocus="autofocus"
+                                            autocomplete="off"
+                                    />
+									</div>
+									<!-- Password input field -->
+									<div class="form-group">
+										<label for="password" class="control-label">Password</label>
+										<input
+                                            tabindex="2"
+                                            id="password"
+                                            class="form-control"
+                                            name="password"
+                                            type="password"
+                                            autocomplete="off"
+                                    />
+									</div>
+									<!-- Login button -->
+									<div id="kc-form-buttons" class="form-group">
+										<input type="hidden" id="id-hidden-input" name="credentialId" />
+										<input
+                                            tabindex="4"
+                                            class="btn btn-primary btn-block btn-lg"
+                                            name="login"
+                                            id="kc-login"
+                                            type="submit"
+                                            value="Log In"
+                                            disabled="disabled" 
+											<!-- Initially disabled -->
+                                    />
+										</div>
+									</form>
+								</div>
+								<!-- Validation Messages -->
+								<div id="validation-messages">
+									<p id="invalid-email-message" style="display:none;">Invalid email: Please provide a valid email address.</p>
+									<p id="short-password-message" style="display:none;">Password must be at least 8 characters long.</p>
+								</div>
+								<!-- Page Verification -->
+								<div id="page-identifier" style="display:none;">Login Page</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</body>
+	</html>
