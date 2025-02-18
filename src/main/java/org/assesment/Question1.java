@@ -41,18 +41,30 @@ public class Question1 {
 
     @Test
     public void login1() {
-
         String filePath = Paths.get("src", "main", "resources", "LoginPage (2).xml").toAbsolutePath().toString();
         driver.get("file:///" + filePath.replace("\\", "/"));
-        //driver.get("file:///C:/Users/Jim/Desktop/LoginPage.xml");
-
-
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("kc-form-login")));
-        driver.findElement(By.id("username")).sendKeys("xxx");
-        driver.findElement(By.id("password")).sendKeys("yyy");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("kc-page-title")));
+        driver.findElement(By.id("email")).sendKeys("test@example.com");
+        driver.findElement(By.id("password")).sendKeys("12345678");
         driver.findElement(By.id("kc-login")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("invalid-email-message")));
+        Assert.assertEquals("Invalid email: Please provide a valid email address.",driver.findElement(By.id("invalid-email-message")).getText());
+        driver.findElement(By.id("email")).clear();
+        driver.findElement(By.id("email")).sendKeys("test1@example.com");
+        driver.findElement(By.id("kc-login")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("invalid-email-message")));
+        Assert.assertEquals("Enter correct email",driver.findElement(By.id("invalid-email-message")).getText());
+    }
 
+    @Test
+    public void login2() {
+        String filePath = Paths.get("src", "main", "resources", "LoginPage (2).xml").toAbsolutePath().toString();
+        driver.get("file:///" + filePath.replace("\\", "/"));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("kc-page-title")));
+        driver.findElement(By.id("email")).sendKeys("user@example.com");
+        driver.findElement(By.id("password")).sendKeys("12345678");
+        driver.findElement(By.id("kc-login")).click();
+        Assert.assertEquals("Success!",driver.findElement(By.id("success-message")).getText());
     }
 
 
